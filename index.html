@@ -29,14 +29,14 @@
 
         <div v-if="!session.isLoggedIn" class="fixed inset-0 bg-military-900 z-[50] flex items-center justify-center p-4">
             <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
-                <img src="cfo.jpg" class="h-24 mx-auto mb-4 object-contain" onerror="this.style.display='none'">
+                <img src="download.jpg" class="h-32 mx-auto mb-4 object-contain" onerror="this.style.display='none'">
                 <h1 class="text-2xl font-bold text-military-900 mb-2">S.I.G.A. Pro</h1>
-                <p class="text-gray-500 mb-6 text-sm">Acesso Restrito</p>
+                <p class="text-gray-500 mb-6 text-sm">Acesso Restrito - APMP</p>
                 <form @submit.prevent="login">
                     <input v-model="session.pwd" type="password" placeholder="Senha (admin)" class="w-full border p-3 rounded mb-4 text-lg outline-none focus:ring-2 focus:ring-military-500">
                     <button class="w-full bg-military-900 text-white py-3 rounded font-bold hover:bg-military-800 transition transform active:scale-95">ENTRAR</button>
                 </form>
-                <p class="mt-6 text-xs text-gray-400 cursor-pointer hover:text-red-500" @click="resetDatabase">[RESETAR BANCO]</p>
+                <p class="mt-6 text-xs text-gray-400 cursor-pointer hover:text-red-500" @click="resetDatabase">[RESETAR BANCO DE DADOS]</p>
             </div>
         </div>
 
@@ -45,33 +45,20 @@
             <aside class="fixed inset-y-0 left-0 z-40 w-72 bg-military-900 text-white flex flex-col transition-transform duration-300 shadow-2xl h-full" :class="ui.menuOpen ? 'translate-x-0' : '-translate-x-full'">
                 <div class="p-6 flex flex-col items-center border-b border-military-700 relative">
                     <button @click="ui.menuOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1"><i class="ph ph-x text-xl"></i></button>
-                    <img src="cfo.jpg" class="h-16 mb-3 object-contain" onerror="this.style.display='none'">
+                    <img src="download.jpg" class="h-20 mb-3 object-contain" onerror="this.style.display='none'">
                     <h1 class="font-bold text-xl tracking-wider">S.I.G.A.</h1>
                 </div>
                 <div class="px-6 py-6">
                 <label class="text-[10px] text-gray-400 uppercase font-bold ml-1">CIA Ativa</label>
                 <div class="mt-2 bg-military-800 rounded-lg p-1 flex border border-military-700">
-                    
-                    <button @click="changeCia('1ª CIA')" 
-                            class="flex-1 py-2 text-xs font-bold rounded transition-all" 
-                            :class="session.currentCia === '1ª CIA' ? 'bg-military-500 text-military-900' : 'text-gray-400'">
-                        1ª CIA
-                    </button>
-            
-                    <button @click="changeCia('2ª CIA')" 
-                            class="flex-1 py-2 text-xs font-bold rounded transition-all" 
-                            :class="session.currentCia === '2ª CIA' ? 'bg-military-500 text-military-900' : 'text-gray-400'">
-                        2ª CIA
-                    </button>
-            
+                    <button @click="changeCia('1ª CIA')" class="flex-1 py-2 text-xs font-bold rounded transition-all" :class="session.currentCia === '1ª CIA' ? 'bg-military-500 text-military-900' : 'text-gray-400'">1ª CIA</button>
+                    <button @click="changeCia('2ª CIA')" class="flex-1 py-2 text-xs font-bold rounded transition-all" :class="session.currentCia === '2ª CIA' ? 'bg-military-500 text-military-900' : 'text-gray-400'">2ª CIA</button>
                 </div>
             </div>
                 <nav class="flex-1 px-4 space-y-1">
                     <button @click="navigate('dashboard')" class="w-full flex items-center gap-4 p-3 rounded-lg text-left" :class="ui.currentView === 'dashboard' ? 'bg-military-800 text-military-500' : 'text-gray-400 hover:bg-military-800'"><i class="ph-bold ph-chart-pie-slice text-xl"></i> Dashboard</button>
                     <button @click="navigate('students')" class="w-full flex items-center gap-4 p-3 rounded-lg text-left" :class="ui.currentView === 'students' ? 'bg-military-800 text-military-500' : 'text-gray-400 hover:bg-military-800'"><i class="ph-bold ph-users text-xl"></i> Efetivo</button>
                     <button @click="navigate('report')" class="w-full flex items-center gap-4 p-3 rounded-lg text-left" :class="ui.currentView === 'report' ? 'bg-military-800 text-military-500' : 'text-gray-400 hover:bg-military-800'"><i class="ph-bold ph-file-text text-xl"></i> Relatório Diário</button>
-                    
-                </nav>
                 </nav>
             </aside>
 
@@ -80,10 +67,10 @@
             <main class="flex-1 flex flex-col h-full min-w-0 bg-slate-50 relative transition-all duration-300">
                 <header class="h-16 bg-white shadow-sm flex items-center px-4 justify-between flex-shrink-0 z-20 sticky top-0">
                     <div class="flex items-center gap-3">
-                        <button @click="ui.menuOpen = true" class="text-gray-600 p-2"><i class="ph ph-list text-2xl"></i></button>
+                        <button @click="ui.menuOpen = true" class="text-gray-600 p-2 hover:bg-gray-100 rounded"><i class="ph ph-list text-2xl"></i></button>
                         <span class="font-bold text-military-900 text-lg uppercase">S.I.G.A. <span class="text-gray-400">|</span> {{ session.currentCia }}</span>
                     </div>
-                    <div class="w-9 h-9 rounded-full bg-military-900 text-military-500 flex items-center justify-center font-bold text-xs">OF</div>
+                    <div class="w-9 h-9 rounded-full bg-military-900 text-military-500 flex items-center justify-center font-bold text-xs shadow-md">OF</div>
                 </header>
 
                 <div class="flex-1 overflow-y-auto p-4 sm:p-6 pb-24 scroll-smooth bg-slate-200">
@@ -101,10 +88,10 @@
                         </div>
                     </div>
 
-                    <div v-if="ui.currentView === 'students'" class="flex flex-col h-full max-w-7xl mx-auto w-full" :key="session.dataVersion">
+                    <div v-if="ui.currentView === 'students'" class="flex flex-col h-full max-w-7xl mx-auto w-full animate-fade-in" :key="session.dataVersion">
                         <div class="flex flex-col space-y-4 mb-6">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                                <div class="flex items-center gap-3"><h2 class="text-xl font-bold text-gray-800">Efetivo</h2><span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded">{{ filteredStudents.length }} Alunos</span></div>
+                                <div class="flex items-center gap-3"><h2 class="text-xl font-bold text-gray-800">Efetivo</h2><span class="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-1 rounded border">{{ filteredStudents.length }} Alunos</span></div>
                                 <div class="flex items-center gap-2 w-full sm:w-auto">
                                     <div class="relative w-full sm:w-64"><i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input v-model="ui.search" type="text" placeholder="Nome ou Nº..." class="pl-9 pr-4 py-2 border rounded-full w-full text-sm focus:ring-2 focus:ring-military-500 outline-none"></div>
                                     <button @click="ui.viewMode = ui.viewMode === 'grid' ? 'canga' : 'grid'" class="p-2 rounded-full border bg-white text-gray-500 hover:text-military-900 transition"><i class="ph-bold" :class="ui.viewMode === 'grid' ? 'ph-users-three' : 'ph-squares-four'"></i></button>
@@ -112,117 +99,74 @@
                             </div>
                             <div class="flex flex-wrap gap-2 filters-bar">
                                 <select v-model="ui.filters.pelotao" class="text-xs border rounded px-2 py-1.5 bg-white"><option value="">Pelotão: Todos</option><option v-for="p in uniquePelotoes" :value="p">{{p}}</option></select>
-                                <select v-model="ui.filters.plantao" class="text-xs border rounded px-2 py-1.5 bg-white">
-                                                                                                                            <option value="">Plantão: Todos</option>
-                                                                                                                            <option value="ALFA">Alfa</option>
-                                                                                                                            <option value="BRAVO">Bravo</option>
-                                                                                                                            <option value="CHARLIE">Charlie</option>
-                                                                                                                            <option value="DELTA">Delta</option>
-                                                                                                                            <option value="ECHO">Echo</option>
-                                                                                                                            <option value="FOXTROT">Foxtrot</option>
-                                                                                                                            <option value="GOLF">Golf</option>
-                                                                                                                            <option value="HOTEL">Hotel</option>
-                                                                                                                            <option value="INDIA">India</option>
-                                                                                                                        </select>
+                                <select v-model="ui.filters.plantao" class="text-xs border rounded px-2 py-1.5 bg-white"><option value="">Plantão: Todos</option><option value="ALFA">Alfa</option><option value="BRAVO">Bravo</option><option value="CHARLIE">Charlie</option><option value="DELTA">Delta</option><option value="ECHO">Echo</option><option value="FOXTROT">Foxtrot</option><option value="GOLF">Golf</option><option value="HOTEL">Hotel</option><option value="INDIA">India</option></select>
                                 <select v-model="ui.filters.alojamento" class="text-xs border rounded px-2 py-1.5 bg-white"><option value="">Alojamento: Todos</option><option value="Alpha">Alpha</option><option value="Bravo">Bravo</option><option value="Fem">Feminino</option></select>
-                                <button v-if="hasFilters" @click="clearFilters" class="text-xs text-red-500 font-bold px-2 py-1">Limpar</button>
+                                <button v-if="hasFilters" @click="clearFilters" class="text-xs text-red-500 font-bold px-2 py-1">Limpar Filtros</button>
                             </div>
                         </div>
 
                         <div v-if="ui.viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                            <div v-for="student in filteredStudents" :key="student.id" class="bg-white rounded-xl shadow-sm hover:shadow-md p-4 border-l-4 relative group" :class="getBorderClass(student)">
+                            <div v-for="student in filteredStudents" :key="student.id" class="bg-white rounded-xl shadow-sm hover:shadow-md p-4 border-l-4 relative group transition-shadow" :class="getBorderClass(student)">
                                 <div class="absolute top-2 left-0 right-0 flex justify-center pointer-events-none"><span class="text-[9px] font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200 shadow-sm">{{ (student.plantao || '').substring(0,3) }}</span></div>
-                                <div v-if="getCycleScore(student) >= 5" class="absolute top-0 right-0 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg shadow-sm">APTO</div>
-                                <div class="flex justify-between items-start mb-2 mt-4"><div class="overflow-hidden w-full"><div class="flex justify-between w-full"><span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">Nº {{ student.numero }}</span><span class="text-xl font-bold leading-none" :class="getCycleScore(student) >= 5 ? 'text-green-600' : 'text-gray-700'">{{ getCycleScore(student) }}</span></div><h3 class="font-bold text-gray-800 truncate mt-1 text-sm">{{ student.nome }}</h3><p class="text-[10px] text-gray-500">{{ student.pelotao }}</p></div></div>
+                                <div v-if="getCycleScore(student) >= 5" class="absolute top-0 right-0 bg-yellow-400 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg shadow-sm">APTO ELOGIO</div>
+                                <div class="flex justify-between items-start mb-2 mt-4"><div class="overflow-hidden w-full"><div class="flex justify-between w-full"><span class="text-[10px] font-bold text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded border">Nº {{ student.numero }}</span><span class="text-xl font-bold leading-none" :class="getCycleScore(student) >= 5 ? 'text-green-600' : 'text-gray-700'">{{ getCycleScore(student) }}</span></div><h3 class="font-bold text-gray-800 truncate mt-1 text-sm">{{ student.nome }}</h3><p class="text-[10px] text-gray-500">{{ student.pelotao }}</p></div></div>
                                 <div class="w-full bg-gray-100 h-1.5 rounded-full mb-3 overflow-hidden"><div class="h-full rounded-full transition-all duration-300" :class="getCycleScore(student) >= 5 ? 'bg-green-500' : (getCycleScore(student) < 0 ? 'bg-red-500' : 'bg-blue-500')" :style="{width: Math.min(Math.max(getCycleScore(student) * 20, 0), 100) + '%'}"></div></div>
-                                <div class="grid grid-cols-2 gap-2"><button @click="openModal(student, 'FO')" class="bg-slate-50 hover:bg-slate-100 text-slate-700 py-1.5 rounded text-[10px] font-bold border border-slate-200">FO</button><button @click="openModal(student, 'PUNICAO')" class="bg-red-50 hover:bg-red-100 text-red-700 py-1.5 rounded text-[10px] font-bold border border-red-200">Punição</button></div>
-                                <button @click="openHistory(student)" class="w-full mt-2 text-[10px] text-military-500 hover:underline">Extrato Completo</button>
+                                <div class="grid grid-cols-2 gap-2"><button @click="openModal(student, 'FO')" class="bg-slate-50 hover:bg-slate-100 text-slate-700 py-1.5 rounded text-[10px] font-bold border border-slate-200 transition">FO (+/-)</button><button @click="openModal(student, 'PUNICAO')" class="bg-red-50 hover:bg-red-100 text-red-700 py-1.5 rounded text-[10px] font-bold border border-red-200 transition">Punição</button></div>
+                                <button @click="openHistory(student)" class="w-full mt-3 text-[10px] font-bold text-military-500 hover:text-military-900 transition flex items-center justify-center gap-1"><i class="ph-bold ph-list-dashes"></i> Extrato Completo</button>
                             </div>
                         </div>
 
                         <div v-if="ui.viewMode === 'canga'" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             <div v-for="pair in cangaList" :key="pair.id" class="bg-white rounded-lg shadow-sm border border-gray-200 p-1 flex">
-                                <div class="flex-1 p-2 border-r border-dashed"><div class="flex justify-between"><span class="text-xs font-bold text-gray-400">Nº {{ pair.s1.numero }}</span><span class="text-sm font-bold">{{ getCycleScore(pair.s1) }}</span></div><h3 class="font-bold text-xs truncate">{{ pair.s1.nome }}</h3><div class="mt-1 flex gap-1"><button @click="openModal(pair.s1, 'FO')" class="bg-slate-50 text-[9px] px-2 rounded border">FO</button><button @click="openHistory(pair.s1)" class="bg-slate-50 px-1 rounded border"><i class="ph-bold ph-list-dashes"></i></button></div></div>
-                                <div v-if="pair.s2" class="flex-1 p-2"><div class="flex justify-between"><span class="text-xs font-bold text-gray-400">Nº {{ pair.s2.numero }}</span><span class="text-sm font-bold">{{ getCycleScore(pair.s2) }}</span></div><h3 class="font-bold text-xs truncate">{{ pair.s2.nome }}</h3><div class="mt-1 flex gap-1"><button @click="openModal(pair.s2, 'FO')" class="bg-slate-50 text-[9px] px-2 rounded border">FO</button><button @click="openHistory(pair.s2)" class="bg-slate-50 px-1 rounded border"><i class="ph-bold ph-list-dashes"></i></button></div></div>
+                                <div class="flex-1 p-2 border-r border-dashed"><div class="flex justify-between"><span class="text-xs font-bold text-gray-500 bg-gray-100 px-1 rounded">Nº {{ pair.s1.numero }}</span><span class="text-sm font-bold">{{ getCycleScore(pair.s1) }}</span></div><h3 class="font-bold text-xs truncate mt-1">{{ pair.s1.nome }}</h3><div class="mt-2 flex gap-1"><button @click="openModal(pair.s1, 'FO')" class="bg-slate-50 hover:bg-slate-100 text-[9px] px-2 py-1 rounded border font-bold">FO</button><button @click="openHistory(pair.s1)" class="bg-slate-50 hover:bg-slate-100 px-2 py-1 rounded border"><i class="ph-bold ph-list-dashes"></i></button></div></div>
+                                <div v-if="pair.s2" class="flex-1 p-2"><div class="flex justify-between"><span class="text-xs font-bold text-gray-500 bg-gray-100 px-1 rounded">Nº {{ pair.s2.numero }}</span><span class="text-sm font-bold">{{ getCycleScore(pair.s2) }}</span></div><h3 class="font-bold text-xs truncate mt-1">{{ pair.s2.nome }}</h3><div class="mt-2 flex gap-1"><button @click="openModal(pair.s2, 'FO')" class="bg-slate-50 hover:bg-slate-100 text-[9px] px-2 py-1 rounded border font-bold">FO</button><button @click="openHistory(pair.s2)" class="bg-slate-50 hover:bg-slate-100 px-2 py-1 rounded border"><i class="ph-bold ph-list-dashes"></i></button></div></div>
                                 <div v-else class="flex-1 p-2 flex items-center justify-center text-xs text-gray-300 italic">Sem Canga</div>
                             </div>
                         </div>
                     </div>
 
-                    <div v-if="ui.currentView === 'report'" class="bg-white rounded-xl shadow p-6 min-h-[500px]">
+                    <div v-if="ui.currentView === 'report'" class="bg-white rounded-xl shadow p-6 min-h-[500px] animate-fade-in">
                         <h2 class="text-xl font-bold text-gray-800 mb-4">Relatório do Dia</h2>
                         <div class="flex flex-wrap gap-4 items-end mb-6">
-    <div class="w-full sm:w-auto">
-        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Data</label>
-        <input v-model="forms.report.date" type="date" class="border rounded p-2 text-sm w-full">
-    </div>
-    
-    <div class="flex-1 min-w-[200px]">
-        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Auxiliar</label>
-        <input v-model="forms.report.auxiliar" type="text" placeholder="Nome do Auxiliar" class="border rounded p-2 w-full text-sm">
-    </div>
-
-    <div class="flex-1 min-w-[200px]">
-        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Adjunto</label>
-        <input v-model="forms.report.adjunto" type="text" placeholder="Nome do Adjunto" class="border rounded p-2 w-full text-sm">
-    </div>
-
-    <button @click="generateReport" class="bg-military-900 text-white px-4 py-2 rounded text-sm font-bold shadow hover:bg-military-800 h-[38px]">
-        Visualizar
-    </button>
-    <button @click="enviarRelatorioWhatsApp" class="bg-green-600 text-white px-4 py-2 rounded text-sm font-bold shadow hover:bg-green-700 flex items-center gap-2 h-[38px]">
-        <i class="ph-bold ph-whatsapp-logo"></i> Enviar Parte
-    </button>
-</div>
+                            <div class="w-full sm:w-auto"><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Data</label><input v-model="forms.report.date" type="date" class="border rounded p-2 text-sm w-full outline-none focus:border-military-500"></div>
+                            <div class="flex-1 min-w-[200px]"><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Auxiliar de Dia</label><input v-model="forms.report.auxiliar" type="text" placeholder="Nome do Auxiliar" class="border rounded p-2 w-full text-sm outline-none focus:border-military-500"></div>
+                            <div class="flex-1 min-w-[200px]"><label class="block text-xs font-bold text-gray-500 uppercase mb-1">Adjunto</label><input v-model="forms.report.adjunto" type="text" placeholder="Nome do Adjunto" class="border rounded p-2 w-full text-sm outline-none focus:border-military-500"></div>
+                            <button @click="generateReport" class="bg-military-900 text-white px-4 py-2 rounded text-sm font-bold shadow hover:bg-military-800 h-[38px] transition">Gerar Visão</button>
+                            <button @click="enviarRelatorioWhatsApp" class="bg-green-600 text-white px-4 py-2 rounded text-sm font-bold shadow hover:bg-green-700 flex items-center gap-2 h-[38px] transition"><i class="ph-bold ph-whatsapp-logo text-lg"></i> Enviar Parte</button>
+                        </div>
                         
                         <div class="border rounded-lg overflow-hidden bg-gray-50 shadow-sm" v-if="forms.report.data.punishments.length || forms.report.data.neg.length || forms.report.data.pos.length">
-                            
                             <div v-if="forms.report.data.punishments.length">
-                                <div class="bg-gray-200 px-4 py-2 font-bold text-sm uppercase border-b border-gray-300">Alterações Disciplinares</div>
-                                <table class="w-full text-sm text-left">
-                                    <thead class="bg-gray-100 text-xs uppercase text-gray-700"><tr><th class="px-4 py-2 w-1/4">Aluno</th><th class="px-4 py-2 w-1/6">Tipo</th><th class="px-4 py-2">Motivo</th><th class="px-4 py-2 w-1/6">Oficial</th></tr></thead>
-                                    <tbody class="divide-y"><tr v-for="i in forms.report.data.punishments" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 font-bold">{{i.studentName}}</td><td class="px-4 py-2 text-center">{{i.typeLabel}}</td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs">{{i.officer}}</td></tr></tbody>
-                                </table>
+                                <div class="bg-gray-200 px-4 py-2 font-bold text-sm uppercase border-b border-gray-300 flex items-center gap-2"><i class="ph-fill ph-warning-octagon text-red-600"></i> Alterações Disciplinares</div>
+                                <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead class="bg-gray-100 text-xs uppercase text-gray-700"><tr><th class="px-4 py-2 w-1/4">Aluno</th><th class="px-4 py-2 w-1/6">Tipo</th><th class="px-4 py-2">Motivo</th><th class="px-4 py-2 w-1/6">Oficial</th></tr></thead><tbody class="divide-y"><tr v-for="i in forms.report.data.punishments" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 font-bold">{{i.studentName}}</td><td class="px-4 py-2 text-center"><span class="bg-red-100 text-red-800 text-[10px] px-2 py-1 rounded font-bold">{{i.typeLabel}}</span></td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs text-gray-500">{{i.officer}}</td></tr></tbody></table></div>
                             </div>
-
                             <div v-if="forms.report.data.neg.length || forms.report.data.pos.length">
-                                <div class="bg-gray-200 px-4 py-2 font-bold text-sm uppercase border-t border-b border-gray-300" :class="{'mt-0': !forms.report.data.punishments.length, 'mt-4': forms.report.data.punishments.length}">Fatos Observados</div>
-                                <table class="w-full text-sm text-left">
-                                    <thead class="bg-gray-100 text-xs uppercase text-gray-700"><tr><th class="px-4 py-2 w-1/6 text-center">Natureza</th><th class="px-4 py-2 w-1/4">Aluno</th><th class="px-4 py-2">Fato</th><th class="px-4 py-2 w-1/6">Oficial</th></tr></thead>
-                                    <tbody class="divide-y">
-                                        <tr v-for="i in forms.report.data.neg" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 font-bold text-red-600 text-center">FO NEGATIVO</td><td class="px-4 py-2">{{i.studentName}}</td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs">{{i.officer}}</td></tr>
-                                        <tr v-for="i in forms.report.data.pos" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 font-bold text-green-600 text-center">FO POSITIVO</td><td class="px-4 py-2">{{i.studentName}}</td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs">{{i.officer}}</td></tr>
-                                    </tbody>
-                                </table>
+                                <div class="bg-gray-200 px-4 py-2 font-bold text-sm uppercase border-t border-b border-gray-300 flex items-center gap-2" :class="{'mt-0': !forms.report.data.punishments.length, 'mt-4': forms.report.data.punishments.length}"><i class="ph-fill ph-clipboard-text text-military-900"></i> Fatos Observados</div>
+                                <div class="overflow-x-auto"><table class="w-full text-sm text-left"><thead class="bg-gray-100 text-xs uppercase text-gray-700"><tr><th class="px-4 py-2 w-1/6 text-center">Natureza</th><th class="px-4 py-2 w-1/4">Aluno</th><th class="px-4 py-2">Fato</th><th class="px-4 py-2 w-1/6">Oficial</th></tr></thead><tbody class="divide-y">
+                                        <tr v-for="i in forms.report.data.neg" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 text-center"><span class="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded border border-red-200">FO NEGATIVO</span></td><td class="px-4 py-2 font-medium">{{i.studentName}}</td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs text-gray-500">{{i.officer}}</td></tr>
+                                        <tr v-for="i in forms.report.data.pos" class="bg-white hover:bg-gray-50"><td class="px-4 py-2 text-center"><span class="bg-green-50 text-green-600 text-[10px] font-bold px-2 py-1 rounded border border-green-200">FO POSITIVO</span></td><td class="px-4 py-2 font-medium">{{i.studentName}}</td><td class="px-4 py-2">{{i.reason}}</td><td class="px-4 py-2 text-center text-xs text-gray-500">{{i.officer}}</td></tr>
+                                </tbody></table></div>
                             </div>
                         </div>
-                        <div v-else class="p-12 text-center text-gray-400 italic bg-gray-50 rounded border border-dashed">
-                            <i class="ph ph-file-search text-3xl mb-2 block"></i>
-                            Nenhum registro encontrado para esta data.
+                        <div v-else class="p-12 text-center text-gray-400 italic bg-gray-50 rounded border border-dashed mt-4">
+                            <i class="ph ph-file-search text-4xl mb-3 text-gray-300 block"></i>
+                            Nenhum registro de alteração encontrado para a data selecionada.
                         </div>
                     </div>
                 </div>
             </main>
         </div>
 
-        <div v-if="modals.record.show" class="fixed inset-0 bg-black bg-opacity-60 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in"><div class="p-4 flex justify-between items-center text-white" :class="modals.record.category === 'FO' ? 'bg-military-900' : 'bg-red-700'"><h3 class="font-bold flex items-center gap-2">Registrar {{ modals.record.category === 'FO' ? 'FO' : 'Punição' }}</h3><button @click="modals.record.show = false"><i class="ph-bold ph-x text-xl"></i></button></div><form @submit.prevent="submitRecord" class="p-6 space-y-4"><p class="text-sm font-bold text-gray-800">{{ modals.record.student?.nome }}</p><select v-model="forms.record.tipo" class="w-full border p-2 rounded"><optgroup label="Fatos Observados" v-if="modals.record.category === 'FO'"><option value="FO+">FO+</option><option value="FO-">FO-</option></optgroup><optgroup label="Sanções Disciplinares" v-if="modals.record.category === 'PUNICAO'"><option value="MEDIDA_LEVE">Medida Educativa (Leve)</option><option value="MEDIDA_MEDIA">Medida Educativa (Média)</option><option value="MEDIDA_GRAVE">Medida Educativa (Grave)</option><option value="PUNICAO">Punição (Extraclasse)</option></optgroup></select>
+        <div v-if="modals.record.show" class="fixed inset-0 bg-black bg-opacity-60 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in"><div class="p-4 flex justify-between items-center text-white" :class="modals.record.category === 'FO' ? 'bg-military-900' : 'bg-red-700'"><h3 class="font-bold flex items-center gap-2"><i class="ph-bold ph-plus-circle text-xl"></i> Registrar {{ modals.record.category === 'FO' ? 'FO' : 'Punição' }}</h3><button @click="modals.record.show = false"><i class="ph-bold ph-x text-xl"></i></button></div><form @submit.prevent="submitRecord" class="p-6 space-y-4"><div class="bg-gray-50 p-3 rounded border text-center"><p class="text-xs text-gray-500 uppercase font-bold">Cadete</p><p class="text-sm font-bold text-gray-800">{{ modals.record.student?.nome }} (Nº {{ modals.record.student?.numero }})</p></div><select v-model="forms.record.tipo" class="w-full border p-2 rounded outline-none focus:border-military-500"><optgroup label="Fatos Observados" v-if="modals.record.category === 'FO'"><option value="FO+">FO Positivo (+1)</option><option value="FO-">FO Negativo (-1)</option></optgroup><optgroup label="Sanções Disciplinares" v-if="modals.record.category === 'PUNICAO'"><option value="MEDIDA_LEVE">Medida Educativa (Leve) [-2]</option><option value="MEDIDA_MEDIA">Medida Educativa (Média) [-3]</option><option value="MEDIDA_GRAVE">Medida Educativa (Grave) [-4]</option><option value="PUNICAO">Punição (Extraclasse) [-5]</option></optgroup></select>
                 <div class="relative">
-                    <textarea v-model="forms.record.motivo" rows="3" class="w-full border p-2 rounded pr-24" placeholder="Motivo (ex: aluno chegou atrasado)"></textarea>
-                    <button 
-                        @click.prevent="melhorarTextoComIA" 
-                        class="absolute right-2 bottom-2 bg-indigo-600 text-white text-[10px] px-2 py-1 rounded hover:bg-indigo-700 flex items-center gap-1 shadow-sm transition-all"
-                        :class="{'opacity-50 cursor-wait': isImprovingText}"
-                        :disabled="isImprovingText"
-                        title="Reescrever com Inteligência Artificial"
-                    >
-                        <i class="ph-bold" :class="isImprovingText ? 'ph-spinner animate-spin' : 'ph-magic-wand'"></i>
-                        {{ isImprovingText ? 'Gerando...' : 'Melhorar Texto' }}
-                    </button>
+                    <textarea v-model="forms.record.motivo" rows="4" class="w-full border p-3 rounded outline-none focus:border-military-500" placeholder="Descreva o motivo da alteração de forma clara e objetiva..." required></textarea>
+                    <button @click.prevent="melhorarTextoComIA" class="absolute right-2 bottom-2 bg-indigo-600 text-white text-[10px] px-2 py-1 rounded hover:bg-indigo-700 flex items-center gap-1 shadow-sm transition-all" :class="{'opacity-50 cursor-wait': isImprovingText}" :disabled="isImprovingText" title="Reescrever com Inteligência Artificial"><i class="ph-bold" :class="isImprovingText ? 'ph-spinner animate-spin' : 'ph-magic-wand'"></i> {{ isImprovingText ? 'Ajustando Padrão...' : 'Padrão Militar (IA)' }}</button>
                 </div>
-                <div class="grid grid-cols-2 gap-2"><input type="date" v-model="forms.record.data" class="border p-2 rounded"><select v-model="forms.record.oficial" class="border p-2 rounded"><option v-for="o in lists.officers" :value="o">{{o}}</option></select></div><input v-if="forms.record.oficial === 'Outro'" type="text" v-model="forms.record.customOficial" placeholder="Nome Oficial" class="w-full border p-2 rounded"><input type="text" v-model="forms.record.sei" placeholder="Nº SEI (Opcional)" class="w-full border p-2 rounded"><button class="w-full bg-military-900 text-white py-3 rounded font-bold">SALVAR</button></form></div></div>
+                <div class="grid grid-cols-2 gap-3"><input type="date" v-model="forms.record.data" class="border p-2 rounded outline-none focus:border-military-500" required><select v-model="forms.record.oficial" class="border p-2 rounded outline-none focus:border-military-500"><option v-for="o in lists.officers" :value="o">{{o}}</option></select></div><input v-if="forms.record.oficial === 'Outro'" type="text" v-model="forms.record.customOficial" placeholder="Digite o Posto e Nome do Oficial" class="w-full border p-2 rounded outline-none focus:border-military-500" required><input type="text" v-model="forms.record.sei" placeholder="Nº SEI (Opcional)" class="w-full border p-2 rounded outline-none focus:border-military-500"><button class="w-full bg-military-900 text-white py-3 rounded font-bold shadow hover:bg-military-800 transition transform active:scale-95">REGISTRAR ALTERAÇÃO</button></form></div></div>
         
-        <div v-if="modals.history.show" class="fixed inset-0 bg-black bg-opacity-50 z-[200] flex justify-end"><div class="w-full max-w-lg bg-white h-full shadow-2xl flex flex-col slide-in"><div class="p-5 bg-military-900 text-white flex justify-between items-center"><div><h3 class="font-bold">{{ modals.history.student?.nome }}</h3><p class="text-xs opacity-70">{{ modals.history.student?.pelotao }}</p></div><button @click="modals.history.show = false"><i class="ph-bold ph-x text-xl"></i></button></div><div class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50"><div v-for="(item, idx) in modals.history.student?.history" :key="idx" class="bg-white border-l-4 p-3 shadow-sm" :class="getBorderColor(item.type)"><div class="flex justify-between"><span class="text-xs font-bold">{{ getEventLabel(item.type) }}</span><span class="text-xs text-gray-400">{{ formatDate(item.data) }}</span></div><p class="text-sm mt-1">{{ item.motivo || item.reason }}</p><div class="text-xs text-gray-500 mt-2 flex justify-between"><span>Oficial: {{ item.oficial || item.officer }}</span><button @click="deleteRecord(modals.history.student, idx)" class="text-red-500"><i class="ph-bold ph-trash"></i></button></div></div><div v-if="!modals.history.student?.history?.length" class="text-center py-4 text-gray-400 text-xs">Sem registros.</div></div></div></div>
-        <div v-if="modals.rewards.show" class="fixed inset-0 bg-black bg-opacity-60 z-[200] flex items-center justify-center"><div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[80vh]"><div class="p-4 bg-yellow-500 text-white flex justify-between items-center"><h3 class="font-bold text-lg">Aptos a Elogio</h3><button @click="modals.rewards.show = false"><i class="ph-bold ph-x text-xl"></i></button></div><div class="flex-1 overflow-y-auto"><table class="w-full text-left text-sm"><thead class="bg-gray-50 border-b sticky top-0"><tr><th class="p-4">Cadete</th><th class="p-4 text-right">Saldo</th><th class="p-4 text-right">Ação</th></tr></thead><tbody class="divide-y"><tr v-for="s in rewardList" :key="s.id" class="hover:bg-yellow-50"><td class="p-4 font-bold">{{ s.nome }}</td><td class="p-4 text-right text-green-600 font-bold">{{ getCycleScore(s) }}/5</td><td class="p-4 text-right"><button @click="claimReward(s)" class="bg-yellow-500 text-white text-xs px-3 py-1 rounded font-bold">CONCEDER</button></td></tr></tbody></table></div></div></div>
+        <div v-if="modals.history.show" class="fixed inset-0 bg-black bg-opacity-50 z-[200] flex justify-end"><div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col slide-in"><div class="p-5 bg-military-900 text-white flex justify-between items-center shadow-md z-10"><div><div class="flex items-center gap-2"><span class="bg-military-700 text-[10px] font-bold px-2 py-0.5 rounded">Nº {{ modals.history.student?.numero }}</span><h3 class="font-bold text-lg">{{ modals.history.student?.nome }}</h3></div><p class="text-xs text-military-100 mt-1"><i class="ph-fill ph-users-three"></i> {{ modals.history.student?.pelotao }} | <i class="ph-fill ph-bed"></i> Aloj: {{ modals.history.student?.alojamento }}</p></div><button @click="modals.history.show = false" class="hover:bg-military-800 p-2 rounded transition"><i class="ph-bold ph-x text-xl"></i></button></div><div class="bg-gray-100 p-3 border-b flex justify-between items-center"><span class="text-xs font-bold text-gray-500 uppercase">Saldo do Ciclo</span><span class="text-xl font-bold" :class="getCycleScore(modals.history.student) >= 5 ? 'text-green-600' : (getCycleScore(modals.history.student) < 0 ? 'text-red-600' : 'text-military-900')">{{ getCycleScore(modals.history.student) }} pts</span></div><div class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50"><div v-for="(item, idx) in modals.history.student?.history" :key="idx" class="bg-white border-l-4 p-4 shadow-sm rounded-r-lg relative group" :class="getBorderColor(item.type)"><div class="flex justify-between items-start mb-2"><span class="text-[10px] font-bold px-2 py-0.5 rounded" :class="getBorderColor(item.type).replace('border-', 'bg-').replace('500', '100') + ' ' + getBorderColor(item.type).replace('border-', 'text-').replace('500', '800')">{{ getEventLabel(item.type) }}</span><span class="text-[10px] text-gray-400 font-bold bg-gray-100 px-2 py-0.5 rounded flex items-center gap-1"><i class="ph-bold ph-calendar-blank"></i> {{ formatDate(item.data) }}</span></div><p class="text-sm text-gray-700 leading-relaxed">{{ item.motivo || item.reason }}</p><div class="mt-3 pt-2 border-t border-gray-100 flex justify-between items-center"><span class="text-[10px] text-gray-500 font-bold"><i class="ph-bold ph-user-circle"></i> Oficial: {{ item.oficial || item.officer }}</span><span v-if="item.sei" class="text-[9px] text-blue-500 font-bold">SEI: {{item.sei}}</span></div><button @click="deleteRecord(modals.history.student, idx)" class="absolute top-2 right-2 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition bg-white rounded p-1 shadow-sm" title="Excluir Registro"><i class="ph-bold ph-trash"></i></button></div><div v-if="!modals.history.student?.history?.length" class="text-center py-10 flex flex-col items-center justify-center opacity-50"><i class="ph-fill ph-file-dashed text-4xl mb-2"></i><p class="text-sm font-bold">Ficha Limpa</p><p class="text-xs">Nenhum registro para este aluno.</p></div></div></div></div>
+        
+        <div v-if="modals.rewards.show" class="fixed inset-0 bg-black bg-opacity-60 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[80vh] animate-fade-in"><div class="p-5 bg-yellow-500 text-white flex justify-between items-center"><h3 class="font-bold text-lg flex items-center gap-2"><i class="ph-fill ph-medal text-2xl"></i> Aptos a Elogio (Ciclo)</h3><button @click="modals.rewards.show = false" class="hover:bg-yellow-600 p-1 rounded"><i class="ph-bold ph-x text-xl"></i></button></div><div class="flex-1 overflow-y-auto bg-gray-50"><table class="w-full text-left text-sm"><thead class="bg-white border-b sticky top-0 shadow-sm z-10"><tr><th class="p-4 text-gray-500 uppercase text-xs font-bold">Cadete</th><th class="p-4 text-center text-gray-500 uppercase text-xs font-bold">Saldo</th><th class="p-4 text-right text-gray-500 uppercase text-xs font-bold">Ação</th></tr></thead><tbody class="divide-y"><tr v-for="s in rewardList" :key="s.id" class="hover:bg-yellow-50/50 bg-white transition"><td class="p-4"><p class="font-bold text-gray-800">{{ s.nome }}</p><p class="text-[10px] text-gray-500">Nº {{s.numero}} - {{s.pelotao}}</p></td><td class="p-4 text-center"><span class="bg-green-100 text-green-700 px-2 py-1 rounded font-bold text-xs">{{ getCycleScore(s) }} pts</span></td><td class="p-4 text-right"><button @click="claimReward(s)" class="bg-yellow-500 hover:bg-yellow-600 text-white text-xs px-4 py-2 rounded font-bold shadow-sm transition transform active:scale-95 flex items-center gap-1 ml-auto"><i class="ph-bold ph-check-circle"></i> CONCEDER ELOGIO</button></td></tr><tr v-if="!rewardList.length"><td colspan="3" class="p-8 text-center text-gray-400 italic">Nenhum cadete atingiu a pontuação necessária (+5) neste ciclo.</td></tr></tbody></table></div></div></div>
 
     </div>
 
@@ -230,6 +174,3 @@
 
 </body>
 </html>
-
-
-
